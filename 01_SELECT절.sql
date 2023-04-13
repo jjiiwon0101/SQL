@@ -54,3 +54,8 @@ SELECT  DISTINCT department_id FROM employees;
 --(로우아이디: 데이터베이스 내의 행의 주소를 반환)
 SELECT ROWNUM, ROWID, employee_id
 FROM employees;
+
+
+
+
+

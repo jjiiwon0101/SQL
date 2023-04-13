@@ -31,11 +31,17 @@ SELECT systimestamp FROM dual;
 SELECT sysdate + 1 FROM dual;
 
 SELECT first_time, sysdate - hire_date
-(sysdate - hire_date) / AS year
+(sysdate - hire_date) / 7 AS year
 FROM employees;
 
 -- 날짜 반올림, 절사
-SELECT ROUND(sysdate) FROM dual;
-SELECT ROUND(sysdate, 'year') FROM dual;
-SELECT ROUND(sysdate, 'month') FROM dual;
-SELECT ROUND(sysdate) FROM dual;
+SELECT ROUND(sysdate) FROM dual; 
+SELECT ROUND(sysdate, 'year') FROM dual; -- 년 기준으로 반올림
+SELECT ROUND(sysdate, 'month') FROM dual; --월 기준으로 반올림 (해당 주의 일요일 날짜)
+SELECT ROUND(sysdate, 'day' ) FROM dual; -- 일 기준으로 반오림 (해당 주의 일요일 날짜)
+
+SELECT TRUNC(sysdate) FROM dual; 
+SELECT TRUNC(sysdate, 'year') FROM dual; -- 년 기준으로 절사
+SELECT TRUNC(sysdate, 'month') FROM dual; --월 기준으로 절사 (해당 주의 일요일 날짜)
+SELECT TRUNC(sysdate, 'day' ) FROM dual; -- 일 기준으로 절사 (해당 주의 일요일 날짜)
+

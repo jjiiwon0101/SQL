@@ -31,16 +31,17 @@ SELECT
 FROM employees;
 
 --6. 급여가 10000보다 큰 사원의 이름과 급여를 출력하세요.
-SELECT *
+SELECT  FIRST_NAME, SALARY
 FROM employees
-WHERE salary >= 10000;   
+WHERE salary > 10000;   
 
 --7. 보너스를 받는 사원의 이름과 직무, 보너스율을 출력하세요.
 SELECT 
     first_name,
     last_name,
-    commission_pct
-FROM employees;
+    COMMITSTION_PCT
+FROM employees
+WHERE COMMISITION_PCT IS NOT NULL;
 
 --8. 2003년도 입사한 사원의 이름과 입사일 그리고 급여를 출력하세요.(BETWEEN 연산자 사용)
 SELECT 
@@ -49,7 +50,7 @@ SELECT
     hire_date,
     salary
 FROM employees
-WHERE salary BETWEEN 10000 AND 30000;
+WHERE hire_date BETWEEN '03/01/01' AND '03/12/31';
 
 --9. 2003년도 입사한 사원의 이름과 입사일 그리고 급여를 출력하세요.(LIKE 연산자 사용)
 SELECT 
@@ -62,12 +63,44 @@ WHERE hire_date LIKE '03%';
 --10. 모든 사원의 이름과 급여를 급여가 많은 사원부터 적은 사원순서로 출력하세요.
 SELECT first_name, last_name
 FROM employees
-ORDER BY salary ASC;
+ORDER BY salary DESC;
 
 --11. 위 질의를 60번 부서의 사원에 대해서만 질의하세요. (컬럼: department_id)
-SELECT department_id 
+SELECT department_id, salary
+FROM employees
+WHERE salary = 60
+ORDER BY salary DESC;
 
 --12. 직무아이디가 IT_PROG 이거나, SA_MAN인 사원의 이름과 직무아이디를 출력하세요.
+SELECT first_name, job_id
+FROM employees
+WHERE job_id = 'IT_PROG' OR job_id = 'SA_MAN';
 --13. Steven King 사원의 정보를 “Steven King 사원의 급여는 24000달러 입니다” 형식으로 출력하세요.
+SELECT first_name, job_id
+FROM employees
+WHERE job_id IN ('IT_PROG', 'SA_MAN');
+
+SELECT first_name || ' ' || last_name || '사원의 급여는' || salary || '달러입니다.' 
+FROM employees
+WHERE first_name = 'Steven'
+AND last_name = 'King';
+
 --14. 매니저(MAN) 직무에 해당하는 사원의 이름과 직무아이디를 출력하세요. (컬럼:job_id)
+SELECT first_name, job_id
+FROM employees
+WHERE job_id LIKE '%MAN';
+
 --15. 매니저(MAN) 직무에 해당하는 사원의 이름과 직무아이디를 직무아이디 순서대로 출력하세요.
+SELECT first_name, job_id
+FROM employees
+WHERE job_id LIKE '%MAN'
+ORDER BY  job_id;
+
+
+
+
+
+
+
+
+
