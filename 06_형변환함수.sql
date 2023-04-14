@@ -94,15 +94,21 @@ SELECT
          WHEN 'FI_ACCOUNT' THEN salary*1.4
          ELSE salary
      END) AS result
-FROM employees
+FROM employees;
 
 --문제 1.
 --현재일자를 기준으로 EMPLOYEE테이블의 입사일자(hire_date)를 참조해서 근속년수가 17년 이상인
 --사원을 다음과 같은 형태의 결과를 출력하도록 쿼리를 작성해 보세요. 
 --조건 1) 근속년수가 높은 사원 순서대로 결과가 나오도록 합니다
 SELECT 
-    hire_date(
-FROM employees;
+    department_id AS 사원번호,
+    first_name || ' ' || last_name AS 사원명,
+    TO_DATE(hire_date, 'YY/MM/DD') AS 입사일자,
+    TRUNC((sysdate - hire_date) / 365) AS 근속년수
+    
+FROM employees
+WHERE (sysdate - hire_date) / 365 >= 17
+ORDER BY 근속년수 DESC;
 
 --문제 2.
 --EMPLOYEE 테이블의 manager_id컬럼을 확인하여 first_name, manager_id, 직급을 출력합니다.
@@ -111,7 +117,54 @@ FROM employees;
 --121이라면 ‘대리’
 --122라면 ‘과장’
 --나머지는 ‘임원’ 으로 출력합니다.
---조건 1) manager_id가 100인 사람들을 대상으로만 조회합니다
+--조건 1) department_id가 100인 사람들을 대상으로만 조회합니다
+SELECT 
+    department_id ,
+    first_name,
+    DECODE (
+         manager_id,
+         100, '사원',
+         120, '주임',
+         121, '대리',
+         122 , '과장',
+         '임원'
+         ) AS 직급
+FROM employees
+WHERE department_id = 50;
+
+------------------------------------------------------------------------------------------------------
+
+SELECT
+     salary,
+     employee_id,
+     first_name,
+     DECODE (
+         TRUNC(salary / 1000),
+         0, 'E',
+         1, 'D',
+         2, 'C',
+         3, 'B',
+         'A'
+     ) AS grade
+FROM employees
+ORDER BY salary DESC;
+
+SELECT
+     salary,
+     employee_id,
+     first_name,
+     (CASE
+         WHEN salary BETWEEN 0 AND 999 THEN 'E'
+         WHEN salary BETWEEN 1000 AND 1999 THEN 'D'
+         WHEN salary BETWEEN 2000 AND 2999 THEN 'C'
+         WHEN salary BETWEEN 3000 AND 3999 THEN 'B'
+         ELSE 'A'
+     END) AS grade
+FROM employees
+ORDER BY salary DESC;
+
+
+
 
 
 

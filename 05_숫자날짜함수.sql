@@ -30,8 +30,8 @@ SELECT systimestamp FROM dual;
 
 SELECT sysdate + 1 FROM dual;
 
-SELECT first_time, sysdate - hire_date
-(sysdate - hire_date) / 7 AS year
+SELECT first_time, sysdate - hire_date --일수
+(sysdate - hire_date) / 7 AS year --주수
 FROM employees;
 
 -- 날짜 반올림, 절사
