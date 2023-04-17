@@ -58,7 +58,7 @@ AND
 AND 
     d.location_id = loc.location_id --2
 AND
-    loc.state_province = 'California' --1
+    loc.state_province = 'California'; --1
 
 
 /*
@@ -69,3 +69,41 @@ AND
     employees 테이블의 데이터를 찾아서 조인
 4. 위의 결과와 jobs 테이블을 비교하여 조인하고 최종 결과를 출력.
 */
+
+-- 외부 조인
+/*
+상호 테이블간에 일치되는 값으로 연결되는 내부 조인과는 다르게
+어느 한 테이블에 공통 값이 없더라도 해당 row들이 조회 결과에 
+모두 포함되는 조인을 말합니다.
+*/
+
+SELECT
+    e.first_name, e.last_name, e.hire_date,
+    e.salary, e.job_id, e.department_id, d.department_name
+FROM employees e, departments d, location loc
+WHERE e.department_id = d.department_id(+)
+AND  d.location_id = loc.location_id;
+
+/*
+employees 테이블에는 존재하고, departments 테이블에는 존재하지 않아도
+(+)가 붙지 않은 테이블을 기준으로 하여 departments 테이블이 조인에 
+참여하라는 의미를 부여하기 위해 기호를 붙입니다.
+외부 조인을 사용했더라도, 이후에 내부 조인을 사용하면
+내부조인을 우선적으로 인식합니다.
+*/
+
+/*
+-- 외부 조인 진행 시 모든 조건에 (+)를 붙여야 외부 조인이 유지됩니다.
+-- 일반 조건에도 (+)를 붙이지 않으면 외부 조인이 풀리는 현상이 발생.(데이터 누락)
+*/
+
+SELECT
+    e.employee_id, e.first_name,
+    e.department_id,
+    j.start_date, j.end_date, j.job_id
+FROM employees e, job_history j
+WHERE e.employee_id = j.employee_id(+)
+AND j.department_id(+)= 80;
+
+
+

@@ -73,3 +73,12 @@ SELECT
 FROM auth a LEFT JOIN info i
 ON a.auth_id = i.auth_id
 WHERE a.job = 'scientist';
+
+-- 셀프 조인이란 동일 테이블 사이의 조인을 말합니다.
+-- 동일 테이블 칼럼을 통해 기존에 존재하는 값을 매칭시켜 가져올 때 사용합니다.
+SELECT
+    e1.employee_id, e1.frsit_name, e1.manager_name,
+    e2.first_name, e2.employee_id
+FROM employees e1
+JOIN employees e2
+ON e1.manager_id = e2.employee_id;
