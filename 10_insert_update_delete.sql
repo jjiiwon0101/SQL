@@ -25,4 +25,21 @@ FROM employees WHERE 1 = 2);
 
 SELECT * FROM managers;
 DROP TABLE managers;
+
+-- INSERT (서브쿼리)
+INSERT INTO managers
+(SELECT employee_id, first_name, job_id, hire_date
+FROM employees);
+
+--------------------------------------------------------------------
+
+-- UPDATE
+CREATE TABLE emps AS (SELECT * FROM employees);
+SELECT * FROM emps;
+
+/*
+CTAS를 사용하면 제약 조건은 NOT NULL 말고는 복사되지 않습니다.
+제약조건은 업무 규칙을 지키는 데이터만 저장하고, 그렇지 않은 것들이
+DB에 저장되는 것을 방지하는 목적으로 사용합니다.
+*/
     

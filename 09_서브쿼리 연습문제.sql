@@ -146,13 +146,13 @@ ORDER BY department_id ASC;
 SELECT d.department_id, d.department_name, d.manager_id, d.location_id,
     (SELECT loc.location_id
      FROM locations loc
-     WHERE loc.location_id = d.location_id),
+     WHERE loc.location_id = d.location_id) AS location_id,
     (SELECT loc.street_address
       FROM locations loc
-      WHERE loc.location_id = d.location_id),
+      WHERE loc.location_id = d.location_id)AS street_address,
      (SELECT loc.postal_code
       FROM locations loc
-      WHERE loc.location_id = d.location),
+      WHERE loc.location_id = d.location_id)AS postal_code,
       (SELECT loc.city
 FROM departments d
 ORDER BY d.department_id ASC;
@@ -162,6 +162,29 @@ ORDER BY d.department_id ASC;
 --locations테이블 countries 테이블을 left 조인하세요
 --조건) 로케이션아이디, 주소, 시티, country_id, country_name 만 출력합니다
 --조건) country_name기준 오름차순 정렬
+SELECT 
+    loc.location_id, loc.street_address, loc.city,
+    c.country_id, c.country_name
+FROM locations loc LEFT JOIN countries c
+ON loc.country_id = c.country_id
+ORDER BY c.country_name ASC;
+
 --문제 11.
 --문제 10의 결과를 (스칼라 쿼리)로 동일하게 조회하세요
+SELECT
+    loc.location_id, loc.street_address, loc.city,
+    (
+    SELECT
+        country_id
+    FROM countries c
+    WHERE c.country_id = loc.country_id
+    )AS country_id,
+    (
+    SELECT
+        country_name
+    FROM countries c
+    WHERE c.country_id = loc.country_id
+    ) AS country_name
+FROM locations loc
+ORDER BY country_name ASC;
 
