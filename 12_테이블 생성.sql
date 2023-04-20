@@ -39,13 +39,20 @@ RENAME COLUMN dept_count TO emp_count;
 ALTER TABLE dept2
 MODIFY (dept_name VARCHAR2(4)); 
 
+-- 열 삭제
+ALTER TABLE dept2
+DROP COLUMN emp_count;
 
+-- 테이블 이름 변경
+ALTER TABLE dept2
+RENAME TO dept3;
 
+SELECT * FROM dept3;
 
+-- 테이블 삭제 (구조는 남겨두고 내부 데이터만 모두 삭제)
+TRUNCATE TABLE dept3;
 
-
-
-
+DROP TABLE dept3;
 
 
 
