@@ -80,6 +80,7 @@ WHERE table_name = 'DEPT2';
 
 ------------------------------------------------------------------------
 -- 문제 1
+ROLLBACK;
 CREATE TABLE mem (
     m_name VARCHAR(3) NOT NULL,
     m_num NUMBER(3),
@@ -92,10 +93,23 @@ CREATE TABLE mem (
     CONSTRAINT mem_loca_loc_locid_fk FOREIGN KEY(loca) REFERENCES locations(location_id)
 );
 
+INSERT INTO members
+VALUES('AAA', 1, '18-07-01', 'M', 1800);
+
+INSERT INTO members
+VALUES('BBB', 2, '18-07-01', 'M', 1900);
+
+INSERT INTO members
+VALUES('CCC', 3, sysdate, 'M', 2000);
+
+INSERT INTO members
+VALUES('DDD', 4, sysdate, 'M', 2000);
+
 
 -- 문제2
 SELECT 
-    m_name, m_num, loc.street_address, loc.location_id
+    mem.m_name, mem.m_num, 
+    loc.street_address, loc.location_id
 FROM mem
 JOIN locations loc
 ON loca = loc.location_id

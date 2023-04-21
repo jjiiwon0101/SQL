@@ -44,7 +44,7 @@ WHEN MATCHED THEN -- 조건에 일치하는 경우 타겟 테이블에 이렇게 실행해라
         DELETE
             WHERE a.employee_id = b.employee_id
         
-WHEN NOT MATcHED THEN -- 조건에 일치하지 않는 경우 타겟 테이블에 이렇게 실행해라.
+WHEN NOT MATCHED THEN -- 조건에 일치하지 않는 경우 타겟 테이블에 이렇게 실행해라.
     INSERT /*속성(컬럼)*/ VALUES
     (b.employee_id, b.first_name, b.last_name,
     b.email, b.phone_number, b.hire_date, b.job_id,

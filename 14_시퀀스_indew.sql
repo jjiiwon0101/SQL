@@ -119,7 +119,7 @@ SELECT * FROM
 
 WHERE rn > 10 AND rn <= 20;
 
--- /*+ INDEX(table_name index_name) */
+-- /*+ INDEX(table_name index_name)*/
 -- 지정된 인덱스를 강제로 쓰게끔 지정.
 -- index asc, desc를 추가해서 내림차, 오름차, 순으로 쓰게끔 지정 가능.
 
@@ -128,15 +128,23 @@ RENAME TO tbl_borad_idx;
 
 SELECT * FROM
     (
-    SELECT ROWNUM AS rn, a.*
-    FROM
-        (
-        SELECT *
-        FROM tbl_board
-        ORDER BY bno DESC
-        )a
+    SELECT /*+ INDEX_DESC(table_name index_name) */
+        ROWNUM AS rn,
+        bno,
+        writer
+    FROM tbl_board
 )
 WHERE rn > 10 AND rn <= 20;
+
+/*
+- 인덱스가 권장되는 경우 
+1. 컬럼이 WHERE 또는 조인조건에서 자주 사용되는 경우
+2. 열이 광범위한 값을 포함하는 경우
+3. 테이블이 대형인 경우
+4. 타겟 컬럼이 많은 수의 null값을 포함하는 경우.
+5. 테이블이 자주 수정되고, 이미 하나 이상의 인덱스를 가지고 있는 경우에는
+ 권장하지 않습니다.
+*/
 
 
 

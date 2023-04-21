@@ -116,7 +116,7 @@ WITH CHECK OPTION CONSTRAINT view_emp_test_ck;
 SELECT * FROM view_emp_test;
 
 UPDATE view_emp_test
-SET department_id = 100
+SET job_id = 'test'
 WHERE employee_id = 106;
 
 -- 읽기 전용 뷰 -> WITH READ ONLY(DML 연산을 막음 -> SELECT만 허용)

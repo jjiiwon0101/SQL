@@ -57,7 +57,15 @@ GRANT CREATE SESSION TO test1;
 
 GRANT CONNECT, RESOURCE TO test1;
 
+-- USER_TABLESPACE 테이블 스페이스를 기본 사용 공간으로 지정.
+ALTER USER test1 DEFAULT TABLESPACE user_tablespace
+QUOTA UNLIMITED ON user_tablespace;
 
+-- 테이블 스페이스 내의 객체를 전체 삭제.
+DROP TABLESPACE user_tablespace INCLUDING CONTENTS;
+
+-- 물리적 파일까지 한 번에 삭제하는 법
+DROP TABLESPACE user_tablespace INCLUDING CONTENTS AND DATAFILES;
 
 
 
