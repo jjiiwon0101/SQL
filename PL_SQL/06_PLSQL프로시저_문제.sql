@@ -145,10 +145,9 @@ BEGIN
          VALUES(p_employee_id, p_last_name, p_email, p_hire_date, p_job_id);
 END;
 
+EXEC new_emp_proc(100, 'park', 'park4321', '2023-04-24', 'test2');
 
-
-
-
+SELECT * FROM emps;
 
 
 

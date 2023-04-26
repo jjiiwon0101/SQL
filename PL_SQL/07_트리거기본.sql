@@ -23,8 +23,8 @@ BEGIN
 END;
 
 INSERT INTO tbl_test VALUES(1, '±èÃ¶¼ö');
-
-
+UPDATE tbl_test SET text = '±è»Ç»ß' WHERE id = 1;
+DELETE FROM tbl_test WHERE id = 1;
 
 
 
